@@ -1,0 +1,22 @@
+# Valid Parentheses
+# Verifica si una cadena de paréntesis, corchetes y llaves está balanceada.
+#
+# Fecha: 2026-08-10
+
+def is_valid(s: str) -> bool:
+    stack = []
+    mapping = {')': '(', '}': '{', ']': '['}
+    for char in s:
+        if char in mapping:
+            top = stack.pop() if stack else '#'
+            if mapping[char] != top:
+                return False
+        else:
+            stack.append(char)
+    return not stack
+
+
+if __name__ == '__main__':
+    print(is_valid('()[]{}'))  # True
+    print(is_valid('([)]'))    # False
+    print(is_valid('{[]}'))    # True
